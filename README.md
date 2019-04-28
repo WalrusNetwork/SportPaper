@@ -1,4 +1,4 @@
-# SportPaper [![Build Status](https://travis-ci.org/Electroid/SportPaper.png?branch=master)](https://travis-ci.org/Electroid/SportPaper)
+# SportPaper
 
 A fork of Paper 1.8 with changes for the Stratus Network using Magnet's build system.
 
@@ -22,7 +22,7 @@ Other Notes
 -----------
 
 SportPaper uses a shared config for most config settings.
- 
+
  `sportpaper.yml` contains all the settings that were previously in `bukkit.yml`, `spigot.yml`, and `paper.yml`
 
 Contributing
