@@ -14,9 +14,24 @@
             <id>spigotmc-public</id>
             <url>https://hub.spigotmc.org/nexus/content/groups/public</url>
         </repository>
+        <repository>
+            <id>stratus-public</id>
+            <url>https://repo.stratus.network/repository/maven-public/</url>
+        </repository>
     </repositories>
     <modules>
         <module>SportPaper-API</module>
         <module>SportPaper-Server</module>
     </modules>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>stratus-public</id>
+            <url>https://repo.stratus.network/repository/maven-public/</url>
+        </snapshotRepository>
+        <repository>
+            <id>stratus-public</id>
+            <url>https://repo.stratus.network/repository/maven-public/</url>
+        </repository>
+    </distributionManagement>
 </project>
