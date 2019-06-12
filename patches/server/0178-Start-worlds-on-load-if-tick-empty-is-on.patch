@@ -1,0 +1,22 @@
+From 88af61aa708567e0a50ab0cab2f214d4bc097f1c Mon Sep 17 00:00:00 2001
+From: Austin Mayes <austin@avicus.net>
+Date: Tue, 11 Jun 2019 20:29:23 -0500
+Subject: [PATCH] Start worlds on load if tick empty is on
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+index d358ea58..e18da962 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
+@@ -131,7 +131,7 @@ public class CraftWorld implements World {
+                 world.getServer().getLogger().info("Stopping world " + getName());
+                 getHandle().chunkProviderServer.unloadAllChunks();
+             }
+-        } else if(hasPlayers()) {
++        } else if(PaperSpigotConfig.tickEmptyWorlds || hasPlayers()) {
+             ticking = true;
+             world.getServer().getLogger().info("Starting world " + getName());
+             setKeepSpawnInMemory(getKeepSpawnInMemory());
+-- 
+2.20.1
+
