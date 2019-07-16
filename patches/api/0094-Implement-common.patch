@@ -1,0 +1,266 @@
+From f97fddd0865f56d202522a1f274ae14fbcc1845b Mon Sep 17 00:00:00 2001
+From: Austin Mayes <austin@avicus.net>
+Date: Tue, 16 Jul 2019 16:52:12 -0500
+Subject: [PATCH] Implement common
+
+
+diff --git a/pom.xml b/pom.xml
+index 8a304559..6964bc29 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -101,6 +101,12 @@
+             <version>1.3</version>
+             <scope>test</scope>
+         </dependency>
++
++        <dependency>
++            <groupId>network.stratus</groupId>
++            <artifactId>common</artifactId>
++            <version>1.0-SNAPSHOT</version>
++        </dependency>
+     </dependencies>
+ 
+     <build>
+diff --git a/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java b/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
+deleted file mode 100644
+index f4494edc..00000000
+--- a/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
++++ /dev/null
+@@ -1,19 +0,0 @@
+-package network.stratus.sportpaper.api.text;
+-
+-import java.util.Locale;
+-import net.md_5.bungee.api.chat.BaseComponent;
+-import org.bukkit.command.CommandSender;
+-
+-/**
+- * A component which can be rendered for a specific {@link CommandSender}.
+- */
+-public interface PersonalizedComponent {
+-
+-	/**
+-	 * Translate this component into a {@link BaseComponent} in the specified {@link Locale}.
+-	 *
+-	 * @param sender the person to render this component for
+-	 * @return the translated component
+-	 */
+-	BaseComponent render(CommandSender sender);
+-}
+\ No newline at end of file
+diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index d73e8c74..f5d90d84 100644
+--- a/src/main/java/org/bukkit/Bukkit.java
++++ b/src/main/java/org/bukkit/Bukkit.java
+@@ -12,7 +12,7 @@ import java.util.Set;
+ import java.util.UUID;
+ import java.util.logging.Logger;
+ 
+-import network.stratus.sportpaper.api.text.PersonalizedComponent;
++import network.stratus.common.text.PersonalizedComponent;
+ import org.bukkit.Warning.WarningState;
+ import org.bukkit.command.CommandException;
+ import org.bukkit.command.CommandMap;
+diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
+index f8a4b19e..b085fa5f 100644
+--- a/src/main/java/org/bukkit/Server.java
++++ b/src/main/java/org/bukkit/Server.java
+@@ -14,7 +14,7 @@ import java.util.Set;
+ import java.util.UUID;
+ import java.util.logging.Logger;
+ 
+-import network.stratus.sportpaper.api.text.PersonalizedComponent;
++import network.stratus.common.text.PersonalizedComponent;
+ import org.bukkit.Warning.WarningState;
+ import org.bukkit.command.CommandException;
+ import org.bukkit.command.CommandMap;
+diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
+index a021b99f..efa7956c 100644
+--- a/src/main/java/org/bukkit/World.java
++++ b/src/main/java/org/bukkit/World.java
+@@ -1,7 +1,7 @@
+ package org.bukkit;
+ 
+ import java.io.File;
+-import network.stratus.sportpaper.api.text.PersonalizedComponent;
++import network.stratus.common.text.PersonalizedComponent;
+ import org.bukkit.command.CommandSender;
+ import org.bukkit.generator.ChunkGenerator;
+ 
+diff --git a/src/main/java/org/bukkit/command/CommandSender.java b/src/main/java/org/bukkit/command/CommandSender.java
+index 6faad290..370155d0 100644
+--- a/src/main/java/org/bukkit/command/CommandSender.java
++++ b/src/main/java/org/bukkit/command/CommandSender.java
+@@ -1,11 +1,11 @@
+ package org.bukkit.command;
+ 
+ import java.util.Locale;
+-import network.stratus.sportpaper.api.text.PersonalizedComponent;
++import network.stratus.common.text.PersonalizedComponent;
+ import org.bukkit.Server;
+ import org.bukkit.permissions.Permissible;
+ 
+-public interface CommandSender extends Permissible {
++public interface CommandSender extends Permissible, network.stratus.common.CommandSender {
+ 
+     /**
+      * Sends this sender a message
+@@ -35,12 +35,6 @@ public interface CommandSender extends Permissible {
+      */
+     public String getName();
+ 
+-    /**
+-     * Return this sender's name as viewed by the given sender. Used by
+-     * {@link org.bukkit.entity.Player}s to support fake names.
+-     */
+-    public String getName(CommandSender viewer);
+-
+     // Paper start
+     /**
+      * Sends the component to the sender
+@@ -80,15 +74,6 @@ public interface CommandSender extends Permissible {
+         return Locale.ENGLISH;
+     }
+ 
+-    /**
+-     * Sends a translatable component to this command source using its {@link #getLocale() locale}.
+-     *
+-     * @param translatable the translatable component
+-    */
+-    default void sendMessage(PersonalizedComponent translatable) {
+-        this.sendMessage(translatable.render(this));
+-    }
+-
+     /**
+      * Sends an array of translatable components to this command source using its {@link #getLocale() locale}.
+      *
+diff --git a/src/main/java/org/bukkit/command/ProxiedCommandSender.java b/src/main/java/org/bukkit/command/ProxiedCommandSender.java
+index 24c4ebad..76386cba 100644
+--- a/src/main/java/org/bukkit/command/ProxiedCommandSender.java
++++ b/src/main/java/org/bukkit/command/ProxiedCommandSender.java
+@@ -17,4 +17,58 @@ public interface ProxiedCommandSender extends CommandSender {
+      */
+     CommandSender getCallee();
+ 
++    @Override
++    default String getName(network.stratus.common.CommandSender viewer) {
++        return getCallee().getName(viewer);
++    }
++
++    @Override
++    default void setFakeName(network.stratus.common.CommandSender viewer, String name) {
++        getCallee().setFakeName(viewer, name);
++    }
++
++    @Override
++    default String getFakeName(network.stratus.common.CommandSender viewer) {
++        return getCallee().getFakeName(viewer);
++    }
++
++    @Override
++    default boolean hasFakeName(network.stratus.common.CommandSender viewer) {
++        return getCallee().hasFakeName(viewer);
++    }
++
++    @Override
++    default void clearFakeNames() {
++        getCallee().clearFakeNames();
++    }
++
++    @Override
++    default void setFakeDisplayName(network.stratus.common.CommandSender viewer, String name) {
++        getCallee().setFakeDisplayName(viewer, name);
++    }
++
++    @Override
++    default String getFakeDisplayName(network.stratus.common.CommandSender viewer) {
++        return getCallee().getFakeDisplayName(viewer);
++    }
++
++    @Override
++    default boolean hasFakeDisplayName(network.stratus.common.CommandSender viewer) {
++        return getCallee().hasFakeDisplayName(viewer);
++    }
++
++    @Override
++    default void clearFakeDisplayNames() {
++        getCallee().clearFakeDisplayNames();
++    }
++
++    @Override
++    default String getPlayerListName(network.stratus.common.CommandSender viewer) {
++        return getCallee().getPlayerListName(viewer);
++    }
++
++    @Override
++    default String getDisplayName(network.stratus.common.CommandSender viewer) {
++        return getCallee().getDisplayName(viewer);
++    }
+ }
+diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
+index 05c98d2e..22e6e6ca 100644
+--- a/src/main/java/org/bukkit/entity/Player.java
++++ b/src/main/java/org/bukkit/entity/Player.java
+@@ -32,60 +32,6 @@ import org.github.paperspigot.Title;
+  */
+ public interface Player extends HumanEntity, Conversable, CommandSender, OfflinePlayer, PluginMessageRecipient {
+ 
+-    /**
+-     * Set a fake name for this player when viewed by the given player.
+-     * If the name is null then the fake name is cleared.
+-     */
+-    public void setFakeName(CommandSender viewer, String name);
+-
+-    /**
+-     * Return this player's fake name for the given viewer,
+-     * or null if no fake name is set for that viewer
+-     */
+-    public String getFakeName(CommandSender viewer);
+-
+-    /**
+-     * Test if this player has a fake name set for the given viewer
+-     */
+-    public boolean hasFakeName(CommandSender viewer);
+-
+-    /**
+-     * Clear this player's fake names for all viewers
+-     */
+-    public void clearFakeNames();
+-
+-    /**
+-     * Set a fake display name for this player when viewed by the given player.
+-     * If the name is null then the fake name is cleared.
+-     */
+-    public void setFakeDisplayName(CommandSender viewer, String name);
+-
+-    /**
+-     * Return this player's fake display name for the given viewer,
+-     * or null if no fake name is set for that viewer
+-     */
+-    public String getFakeDisplayName(CommandSender viewer);
+-
+-    /**
+-     * Test if this player has a fake display name set for the given viewer
+-     */
+-    public boolean hasFakeDisplayName(CommandSender viewer);
+-
+-    /**
+-     * Clear this player's fake display names for all viewers
+-     */
+-    public void clearFakeDisplayNames();
+-
+-    /**
+-     * Return this player's list name as viewed by the given player, fake or not
+-     */
+-    public String getPlayerListName(CommandSender viewer);
+-
+-    /**
+-     * Return this player's display name as viewed by the given player, fake or not
+-     */
+-    public String getDisplayName(CommandSender viewer);
+-
+     /**
+      * Gets the "friendly" name to display of this player. This may include
+      * color.
+-- 
+2.20.1
+
