@@ -1,11 +1,11 @@
-From da34fbd93efe7e9ccb1ae6fbeb1f9cce59728f49 Mon Sep 17 00:00:00 2001
+From 2f2ec75e2a87aa07992c792760bfd1a27056e0c1 Mon Sep 17 00:00:00 2001
 From: Austin Mayes <austin@avicus.net>
 Date: Tue, 16 Jul 2019 16:52:28 -0500
 Subject: [PATCH] Implement common
 
 
 diff --git a/pom.xml b/pom.xml
-index ee562d2..abfe2e4 100644
+index ee562d2e5..abfe2e4a4 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -92,6 +92,11 @@
@@ -21,7 +21,7 @@ index ee562d2..abfe2e4 100644
  
      <!-- required until fixed plexus-compiler-eclipse is deployed -->
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
-index e18da96..79c7fe1 100644
+index e18da962d..79c7fe103 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftWorld.java
 @@ -15,7 +15,7 @@ import java.util.UUID;
@@ -34,23 +34,23 @@ index e18da96..79c7fe1 100644
  import org.bukkit.BlockChangeDelegate;
  import org.bukkit.Bukkit;
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java b/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
-index be7f7d8..ac02ba8 100644
+index be7f7d8e4..ac02ba80a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ProxiedNativeCommandSender.java
-@@ -60,11 +60,6 @@ public class ProxiedNativeCommandSender implements ProxiedCommandSender {
+@@ -59,11 +59,6 @@ public class ProxiedNativeCommandSender implements ProxiedCommandSender {
+         return getCallee().getName();
      }
  
-     @Override
+-    @Override
 -    public String getName(CommandSender viewer) {
 -        return getCallee().getName(viewer);
 -    }
 -
--    @Override
+     @Override
      public boolean isPermissionSet(String name) {
          return getCaller().isPermissionSet(name);
-     }
 diff --git a/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java b/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
-index c32dee2..a0f3f1d 100644
+index c32dee208..a0f3f1d5e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
 +++ b/src/main/java/org/bukkit/craftbukkit/command/ServerCommandSender.java
 @@ -140,7 +140,57 @@ public abstract class ServerCommandSender implements CommandSender {
@@ -114,7 +114,7 @@ index c32dee2..a0f3f1d 100644
      }
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
-index 2c1b591..2d1532f 100644
+index 2c1b591a9..2d1532f1c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftEntity.java
 @@ -9,12 +9,12 @@ import java.util.UUID;
@@ -189,23 +189,23 @@ index 2c1b591..2d1532f 100644
      private final Spigot spigot = new Spigot()
      {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java
-index 1498bec..db2f9ac 100644
+index 1498bec6c..db2f9ac49 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftMinecartCommand.java
-@@ -57,11 +57,6 @@ public class CraftMinecartCommand extends CraftMinecart implements CommandMineca
+@@ -56,11 +56,6 @@ public class CraftMinecartCommand extends CraftMinecart implements CommandMineca
+         return ((EntityMinecartCommandBlock) getHandle()).getCommandBlock().getName();
      }
  
-     @Override
+-    @Override
 -    public String getName(org.bukkit.command.CommandSender viewer) {
 -        return this.getName();
 -    }
 -
--    @Override
+     @Override
      public boolean isOp() {
          return true;
-     }
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index 442c811..f9e9897 100644
+index 442c8119f..f9e98970b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -28,6 +28,7 @@ import net.md_5.bungee.api.chat.BaseComponent;
@@ -283,5 +283,5 @@ index 442c811..f9e9897 100644
          nameChanged = nameChanged && !Objects.equal(oldName, newName);
          Skin oldSkin = this.fakeSkins.get(viewer);
 -- 
-2.7.4
+2.22.1
 

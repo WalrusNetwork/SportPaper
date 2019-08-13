@@ -1,17 +1,18 @@
-From 66219a9b2b2c24c03b3583433e147d2492b9687c Mon Sep 17 00:00:00 2001
+From ef1c95923e4363aeb34b4b3e8ba2bb35f03f9284 Mon Sep 17 00:00:00 2001
 From: cswhite2000 <18whitechristop@gmail.com>
 Date: Wed, 8 Aug 2018 01:12:39 -0700
 Subject: [PATCH] Improve BlockState API
 
 
 diff --git a/src/main/java/org/bukkit/block/BlockState.java b/src/main/java/org/bukkit/block/BlockState.java
-index 866a73d..1ab645f 100644
+index 866a73d9..1ab645fb 100644
 --- a/src/main/java/org/bukkit/block/BlockState.java
 +++ b/src/main/java/org/bukkit/block/BlockState.java
-@@ -26,10 +26,39 @@ public interface BlockState extends Metadatable {
+@@ -25,11 +25,40 @@ public interface BlockState extends Metadatable {
+      */
      Block getBlock();
  
-     /**
++    /**
 +     * Get the material of this block state.
 +     */
 +    Material getMaterial();
@@ -39,7 +40,7 @@ index 866a73d..1ab645f 100644
 +     */
 +    void setMaterialData(MaterialData materialData);
 +
-+    /**
+     /**
       * Gets the metadata for this block
       *
       * @return block specific metadata
@@ -73,5 +74,5 @@ index 866a73d..1ab645f 100644
  
      /**
 -- 
-2.7.4
+2.22.1
 

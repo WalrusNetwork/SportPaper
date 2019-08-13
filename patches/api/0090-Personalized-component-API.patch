@@ -1,62 +1,42 @@
-From 0e5d0b98b57262f737de6d0991a52fce933ef991 Mon Sep 17 00:00:00 2001
+From 9fe8cdd76613c7178300f315a9f9cf4fec7671c3 Mon Sep 17 00:00:00 2001
 From: Austin Mayes <almayes@trevecca.edu>
 Date: Tue, 5 Mar 2019 21:25:40 -0600
 Subject: [PATCH] Personalized component API
 
 
-diff --git a/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java b/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
-new file mode 100644
-index 0000000..f4494ed
---- /dev/null
-+++ b/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
-@@ -0,0 +1,19 @@
-+package network.stratus.sportpaper.api.text;
-+
-+import java.util.Locale;
-+import net.md_5.bungee.api.chat.BaseComponent;
-+import org.bukkit.command.CommandSender;
-+
-+/**
-+ * A component which can be rendered for a specific {@link CommandSender}.
-+ */
-+public interface PersonalizedComponent {
-+
-+	/**
-+	 * Translate this component into a {@link BaseComponent} in the specified {@link Locale}.
-+	 *
-+	 * @param sender the person to render this component for
-+	 * @return the translated component
-+	 */
-+	BaseComponent render(CommandSender sender);
-+}
-\ No newline at end of file
-diff --git a/src/main/java/network/stratus/sportpaper/api/text/TranslatableComponent.java b/src/main/java/network/stratus/sportpaper/api/text/TranslatableComponent.java
-deleted file mode 100644
-index 2c4ebfc..0000000
+diff --git a/src/main/java/network/stratus/sportpaper/api/text/TranslatableComponent.java b/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
+similarity index 50%
+rename from src/main/java/network/stratus/sportpaper/api/text/TranslatableComponent.java
+rename to src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
+index 2c4ebfcc..f4494edc 100644
 --- a/src/main/java/network/stratus/sportpaper/api/text/TranslatableComponent.java
-+++ /dev/null
-@@ -1,18 +0,0 @@
--package network.stratus.sportpaper.api.text;
--
--import java.util.Locale;
--import net.md_5.bungee.api.chat.BaseComponent;
--
--/**
++++ b/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
+@@ -2,17 +2,18 @@ package network.stratus.sportpaper.api.text;
+ 
+ import java.util.Locale;
+ import net.md_5.bungee.api.chat.BaseComponent;
++import org.bukkit.command.CommandSender;
+ 
+ /**
 - * A component which can be translated using a {@link Locale}.
-- */
++ * A component which can be rendered for a specific {@link CommandSender}.
+  */
 -public interface TranslatableComponent {
--
--	/**
--	 * Translate this component into a {@link BaseComponent} in the specified {@link Locale}.
--	 *
++public interface PersonalizedComponent {
+ 
+ 	/**
+ 	 * Translate this component into a {@link BaseComponent} in the specified {@link Locale}.
+ 	 *
 -	 * @param locale the locale to translate this component into
--	 * @return the translated component
--	 */
++	 * @param sender the person to render this component for
+ 	 * @return the translated component
+ 	 */
 -	BaseComponent translate(Locale locale);
--}
++	BaseComponent render(CommandSender sender);
+ }
 \ No newline at end of file
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index 0d835e4..d73e8c7 100644
+index 0d835e42..d73e8c74 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -12,7 +12,7 @@ import java.util.Set;
@@ -81,7 +61,7 @@ index 0d835e4..d73e8c7 100644
      }
      // SportPaper end
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index e787891..f8a4b19 100644
+index e7878915..f8a4b19e 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -14,7 +14,7 @@ import java.util.Set;
@@ -106,7 +86,7 @@ index e787891..f8a4b19 100644
      }
      // SportPaper end
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
-index 9daad1b..a021b99 100644
+index 9daad1b6..a021b99f 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
 @@ -1,7 +1,7 @@
@@ -136,7 +116,7 @@ index 9daad1b..a021b99 100644
      /**
       * @see #fastBlockChange(Vector, short, byte) with data from the material
 diff --git a/src/main/java/org/bukkit/command/CommandSender.java b/src/main/java/org/bukkit/command/CommandSender.java
-index 0726b5e..6faad29 100644
+index 0726b5ea..6faad290 100644
 --- a/src/main/java/org/bukkit/command/CommandSender.java
 +++ b/src/main/java/org/bukkit/command/CommandSender.java
 @@ -1,7 +1,7 @@
@@ -173,5 +153,5 @@ index 0726b5e..6faad29 100644
      }
      // SportPaper end
 -- 
-2.7.4
+2.22.1
 
