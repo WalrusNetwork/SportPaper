@@ -1,0 +1,38 @@
+From 960f81e1e559a93486809f43a4e4c5c62d823a25 Mon Sep 17 00:00:00 2001
+From: Matt Arnold <powertheyoyo@gmail.com>
+Date: Tue, 13 Aug 2019 01:05:39 +0100
+Subject: [PATCH] Add option to remove randomness in arrow damage
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityArrow.java b/src/main/java/net/minecraft/server/EntityArrow.java
+index 4366f34b..86e237dd 100644
+--- a/src/main/java/net/minecraft/server/EntityArrow.java
++++ b/src/main/java/net/minecraft/server/EntityArrow.java
+@@ -247,7 +247,7 @@ public class EntityArrow extends Entity implements IProjectile {
+                     f2 = MathHelper.sqrt(this.motX * this.motX + this.motY * this.motY + this.motZ * this.motZ);
+                     int k = MathHelper.f((double) f2 * this.damage);
+ 
+-                    if (this.isCritical()) {
++                    if (this.isCritical() && PaperSpigotConfig.includeRandomnessInArrowDamage) { // Sportpaper
+                         k += this.random.nextInt(k / 2 + 2);
+                     }
+ 
+diff --git a/src/main/java/org/github/paperspigot/PaperSpigotConfig.java b/src/main/java/org/github/paperspigot/PaperSpigotConfig.java
+index 9360eac7..acce3f3a 100644
+--- a/src/main/java/org/github/paperspigot/PaperSpigotConfig.java
++++ b/src/main/java/org/github/paperspigot/PaperSpigotConfig.java
+@@ -117,6 +117,11 @@ public class PaperSpigotConfig
+         includeRandomnessInArrowTrajectory = getBoolean("settings.include-randomness-in-arrow-trajectory", includeRandomnessInArrowTrajectory);
+     }
+ 
++    public static boolean includeRandomnessInArrowDamage = false;
++    private static void includeRandomnessInArrowDamage() {
++        includeRandomnessInArrowDamage = getBoolean("settings.include-randomness-in-arrow-damage", includeRandomnessInArrowDamage);
++    }
++
+     public static boolean tickEmptyWorlds = true;
+     private static void tickEmptyWorlds() {
+         tickEmptyWorlds = getBoolean("settings.tick-empty-worlds", tickEmptyWorlds);
+-- 
+2.22.0
+
