@@ -1,0 +1,117 @@
+From c089254d7b864cb0fec54c38adb874aff148da78 Mon Sep 17 00:00:00 2001
+From: ShinyDialga <shinydialga45@gmail.com>
+Date: Mon, 12 Aug 2019 16:02:12 -0500
+Subject: [PATCH] Add configurable knockback
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityHuman.java b/src/main/java/net/minecraft/server/EntityHuman.java
+index ac644d2..02eb2dc 100644
+--- a/src/main/java/net/minecraft/server/EntityHuman.java
++++ b/src/main/java/net/minecraft/server/EntityHuman.java
+@@ -20,6 +20,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
+ import org.bukkit.event.player.PlayerItemConsumeEvent;
+ import org.bukkit.event.player.PlayerVelocityEvent;
+ import org.bukkit.util.Vector;
++import org.github.paperspigot.PaperSpigotConfig;
+ // CraftBukkit end
+ 
+ public abstract class EntityHuman extends EntityLiving {
+@@ -1037,7 +1038,12 @@ public abstract class EntityHuman extends EntityLiving {
+ 
+                     if (flag2) {
+                         if (i > 0) {
+-                            entity.g((double) (-MathHelper.sin(this.yaw * 3.1415927F / 180.0F) * (float) i * 0.5F), 0.1D, (double) (MathHelper.cos(this.yaw * 3.1415927F / 180.0F) * (float) i * 0.5F));
++                            // Paper start - configurable knockback
++                            entity.g(
++                                    (double) (-MathHelper.sin(this.yaw * 3.1415927F / 180.0F) * (float) i * PaperSpigotConfig.knockbackExtraHorizontal),
++                                    PaperSpigotConfig.knockbackExtraVertical,
++                                    (double) (MathHelper.cos(this.yaw * 3.1415927F / 180.0F) * (float) i * PaperSpigotConfig.knockbackExtraHorizontal));
++                            // Paper end
+                             this.motX *= 0.6D;
+                             this.motZ *= 0.6D;
+                             this.setSprinting(false);
+diff --git a/src/main/java/net/minecraft/server/EntityLiving.java b/src/main/java/net/minecraft/server/EntityLiving.java
+index 1bcb177..0ffa93e 100644
+--- a/src/main/java/net/minecraft/server/EntityLiving.java
++++ b/src/main/java/net/minecraft/server/EntityLiving.java
+@@ -30,6 +30,7 @@ import org.bukkit.event.entity.PotionEffectExtendEvent;
+ import org.bukkit.event.entity.PotionEffectRemoveEvent;
+ import org.bukkit.event.vehicle.VehicleExitEvent;
+ import org.bukkit.util.Vector;
++import org.github.paperspigot.PaperSpigotConfig;
+ import org.github.paperspigot.event.entity.EntityKnockbackByEntityEvent;
+ // CraftBukkit end
+ 
+@@ -934,30 +935,31 @@ public abstract class EntityLiving extends Entity {
+     public void a(Entity entity, float f, double d0, double d1) {
+         if (this.random.nextDouble() >= this.getAttributeInstance(GenericAttributes.c).getValue()) {
+             this.ai = true;
+-            float f1 = MathHelper.sqrt(d0 * d0 + d1 * d1);
+-            float f2 = 0.4F;
++            //Paper start - custom knockback
++            double magnitude = MathHelper.sqrt(d0 * d0 + d1 * d1);
+ 
+-            // CraftBukkit start
+             double knockbackReduction = this.getBukkitEntity().getKnockbackReduction();
+-            double friction = 2.0d - knockbackReduction;
+-            f2 *= (1d - knockbackReduction);
++            double friction = PaperSpigotConfig.knockbackFriction - knockbackReduction;
++
++            double horizontalKnockback = PaperSpigotConfig.knockbackHorizontal * (1d - knockbackReduction);
++            double verticalKnockback = PaperSpigotConfig.knockbackVertical * (1d - knockbackReduction);
+ 
+-            // Paper start - preserve old velocity
+             double oldMotX = this.motX;
+             double oldMotY = this.motY;
+             double oldMotZ = this.motZ;
+-            // Paper end
+ 
+             this.motX /= friction;
+             this.motY /= friction;
+             this.motZ /= friction;
+-            // CraftBukkit end
+-            this.motX -= d0 / (double) f1 * (double) f2;
+-            this.motY += (double) f2;
+-            this.motZ -= d1 / (double) f1 * (double) f2;
+-            if (this.motY > 0.4000000059604645D) {
+-                this.motY = 0.4000000059604645D;
++
++            this.motX -= d0 / magnitude * horizontalKnockback;
++            this.motY += verticalKnockback;
++            this.motZ -= d1 / magnitude * horizontalKnockback;
++
++            if (this.motY > PaperSpigotConfig.knockbackVerticalLimit) {
++                this.motY = PaperSpigotConfig.knockbackVerticalLimit;
+             }
++            // Paper end
+ 
+             // Paper start - call EntityKnockbackByEntityEvent
+             Vector delta = new org.bukkit.util.Vector(this.motX - oldMotX, this.motY - oldMotY, this.motZ - oldMotZ);
+diff --git a/src/main/java/org/github/paperspigot/PaperSpigotConfig.java b/src/main/java/org/github/paperspigot/PaperSpigotConfig.java
+index 9360eac..c1ffcb8 100644
+--- a/src/main/java/org/github/paperspigot/PaperSpigotConfig.java
++++ b/src/main/java/org/github/paperspigot/PaperSpigotConfig.java
+@@ -200,4 +200,20 @@ public class PaperSpigotConfig
+     private static void firePhysicsEventForRedstone() {
+         firePhysicsEventForRedstone = getBoolean("fire-physics-event-for-redstone", firePhysicsEventForRedstone);
+     }
++
++    public static double knockbackFriction;
++    public static double knockbackHorizontal;
++    public static double knockbackVertical;
++    public static double knockbackVerticalLimit;
++    public static double knockbackExtraHorizontal;
++    public static double knockbackExtraVertical;
++    private static void knockback()
++    {
++        knockbackFriction = getDouble( "knockback.friction", 2.0D );
++        knockbackHorizontal = getDouble( "knockback.horizontal", 0.35D );
++        knockbackVertical = getDouble( "knockback.vertical", 0.35D );
++        knockbackVerticalLimit = getDouble( "knockback.vertical-limit", 0.4D );
++        knockbackExtraHorizontal = getDouble( "knockback.extra-horizontal", 0.425D );
++        knockbackExtraVertical = getDouble( "knockback.extra-vertical", 0.085D );
++    }
+ }
+-- 
+2.7.4
+

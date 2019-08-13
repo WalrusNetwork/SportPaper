@@ -1,11 +1,11 @@
-From da45bcabfc7bbb009d25707fc1f7e66bc474f0fc Mon Sep 17 00:00:00 2001
+From d8548c76fdf485ccdd5f9b3f3c2e7d298d51b5d2 Mon Sep 17 00:00:00 2001
 From: Rafi Baum <rafi@ukbaums.com>
 Date: Fri, 14 Jun 2019 17:27:11 +0100
 Subject: [PATCH] Add reason to potion effect add event
 
 
 diff --git a/src/main/java/org/bukkit/command/defaults/EffectCommand.java b/src/main/java/org/bukkit/command/defaults/EffectCommand.java
-index de63bbe1..66e51487 100644
+index de63bbe..66e5148 100644
 --- a/src/main/java/org/bukkit/command/defaults/EffectCommand.java
 +++ b/src/main/java/org/bukkit/command/defaults/EffectCommand.java
 @@ -6,6 +6,7 @@ import java.util.List;
@@ -26,7 +26,7 @@ index de63bbe1..66e51487 100644
          }
  
 diff --git a/src/main/java/org/bukkit/entity/LivingEntity.java b/src/main/java/org/bukkit/entity/LivingEntity.java
-index 7b2d0de4..ae78803f 100644
+index 7b2d0de..ae78803 100644
 --- a/src/main/java/org/bukkit/entity/LivingEntity.java
 +++ b/src/main/java/org/bukkit/entity/LivingEntity.java
 @@ -9,6 +9,7 @@ import org.bukkit.Location;
@@ -37,11 +37,10 @@ index 7b2d0de4..ae78803f 100644
  import org.bukkit.inventory.EntityEquipment;
  import org.bukkit.potion.PotionEffect;
  import org.bukkit.potion.PotionEffectType;
-@@ -294,6 +295,41 @@ public interface LivingEntity extends Attributable, Entity, Damageable, Projecti
-      */
+@@ -295,6 +296,41 @@ public interface LivingEntity extends Attributable, Entity, Damageable, Projecti
      public boolean addPotionEffects(Collection<PotionEffect> effects);
  
-+    /**
+     /**
 +     * Adds the given {@link PotionEffect} to the living entity.
 +     * <p>
 +     * Only one potion effect can be present for a given {@link
@@ -76,11 +75,12 @@ index 7b2d0de4..ae78803f 100644
 +     */
 +    public boolean addPotionEffects(Collection<PotionEffect> effects, EffectAddReason reason);
 +
-     /**
++    /**
       * Returns whether the living entity already has an existing effect of
       * the given {@link PotionEffectType} applied to it.
+      *
 diff --git a/src/main/java/org/bukkit/event/entity/PotionEffectAddEvent.java b/src/main/java/org/bukkit/event/entity/PotionEffectAddEvent.java
-index a0e06344..1df6ac54 100644
+index a0e0634..1df6ac5 100644
 --- a/src/main/java/org/bukkit/event/entity/PotionEffectAddEvent.java
 +++ b/src/main/java/org/bukkit/event/entity/PotionEffectAddEvent.java
 @@ -11,9 +11,11 @@ import org.bukkit.potion.PotionEffect;
@@ -161,7 +161,7 @@ index a0e06344..1df6ac54 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/event/entity/PotionEffectExtendEvent.java b/src/main/java/org/bukkit/event/entity/PotionEffectExtendEvent.java
-index 02164cf3..83d587b6 100644
+index 02164cf..83d587b 100644
 --- a/src/main/java/org/bukkit/event/entity/PotionEffectExtendEvent.java
 +++ b/src/main/java/org/bukkit/event/entity/PotionEffectExtendEvent.java
 @@ -12,8 +12,9 @@ public class PotionEffectExtendEvent extends PotionEffectAddEvent {
@@ -177,7 +177,7 @@ index 02164cf3..83d587b6 100644
      }
  
 diff --git a/src/main/java/org/bukkit/potion/Potion.java b/src/main/java/org/bukkit/potion/Potion.java
-index 36f2f1ad..3bdae10e 100644
+index 36f2f1a..3bdae10 100644
 --- a/src/main/java/org/bukkit/potion/Potion.java
 +++ b/src/main/java/org/bukkit/potion/Potion.java
 @@ -5,6 +5,7 @@ import java.util.Collection;
@@ -204,7 +204,7 @@ index 36f2f1ad..3bdae10e 100644
  
      @Override
 diff --git a/src/main/java/org/bukkit/potion/PotionEffect.java b/src/main/java/org/bukkit/potion/PotionEffect.java
-index 60a35516..cb592899 100644
+index 60a3551..cb59289 100644
 --- a/src/main/java/org/bukkit/potion/PotionEffect.java
 +++ b/src/main/java/org/bukkit/potion/PotionEffect.java
 @@ -10,6 +10,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
@@ -231,5 +231,5 @@ index 60a35516..cb592899 100644
  
      @Override
 -- 
-2.17.1
+2.7.4
 

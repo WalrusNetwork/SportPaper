@@ -1,4 +1,4 @@
-From b752418cdaab59c308c9e142f7ed5991830acd41 Mon Sep 17 00:00:00 2001
+From 2a380a40a8ebe1c9468bf48ffbd76c5193976b10 Mon Sep 17 00:00:00 2001
 From: Rafi Baum <rafi@ukbaums.com>
 Date: Tue, 23 Apr 2019 16:32:42 -0400
 Subject: [PATCH] Add world generation customization API
@@ -6,7 +6,7 @@ Subject: [PATCH] Add world generation customization API
 
 diff --git a/src/main/java/network/stratus/sportpaper/api/world/CustomizedGenerationSettings.java b/src/main/java/network/stratus/sportpaper/api/world/CustomizedGenerationSettings.java
 new file mode 100644
-index 00000000..3906d4e2
+index 0000000..3906d4e
 --- /dev/null
 +++ b/src/main/java/network/stratus/sportpaper/api/world/CustomizedGenerationSettings.java
 @@ -0,0 +1,74 @@
@@ -85,7 +85,7 @@ index 00000000..3906d4e2
 +
 +}
 diff --git a/src/main/java/org/bukkit/WorldCreator.java b/src/main/java/org/bukkit/WorldCreator.java
-index 81c95d1f..0bb654a3 100644
+index 81c95d1..0bb654a 100644
 --- a/src/main/java/org/bukkit/WorldCreator.java
 +++ b/src/main/java/org/bukkit/WorldCreator.java
 @@ -1,6 +1,7 @@
@@ -104,11 +104,10 @@ index 81c95d1f..0bb654a3 100644
  
      /**
       * Creates an empty WorldCreationOptions for the given world name
-@@ -259,6 +261,21 @@ public class WorldCreator {
-         return hardcore;
+@@ -260,6 +262,21 @@ public class WorldCreator {
      }
  
-+    /**
+     /**
 +     * @return customized generation settings used in world generation.
 +     */
 +    public CustomizedGenerationSettings getCustomGenSettings() {
@@ -123,9 +122,10 @@ index 81c95d1f..0bb654a3 100644
 +        customGenSettings = settings;
 +    }
 +
-     /**
++    /**
       * Creates a world with the specified options.
       * <p>
+      * If the world already exists, it will be loaded from disk and some
 -- 
-2.17.1
+2.7.4
 

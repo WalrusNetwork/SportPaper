@@ -1,11 +1,11 @@
-From 20b51fb46aea7b502ef6efa2537b87c344e0c5d0 Mon Sep 17 00:00:00 2001
+From 01b0dec0c3fd045262d2009480b8a496c1616700 Mon Sep 17 00:00:00 2001
 From: Austin Mayes <austin@avicus.net>
 Date: Fri, 4 Jan 2019 18:05:36 -0600
 Subject: [PATCH] Add command unregistration API
 
 
 diff --git a/src/main/java/org/bukkit/command/CommandMap.java b/src/main/java/org/bukkit/command/CommandMap.java
-index e7e20d89..168d6a90 100644
+index e7e20d8..168d6a9 100644
 --- a/src/main/java/org/bukkit/command/CommandMap.java
 +++ b/src/main/java/org/bukkit/command/CommandMap.java
 @@ -1,6 +1,7 @@
@@ -16,11 +16,10 @@ index e7e20d89..168d6a90 100644
  
  public interface CommandMap {
  
-@@ -65,6 +66,21 @@ public interface CommandMap {
-      */
+@@ -66,6 +67,21 @@ public interface CommandMap {
      public boolean register(String fallbackPrefix, Command command);
  
-+    /**
+     /**
 +     * Unregister a specific command.
 +     *
 +     * @param command to unregister
@@ -35,11 +34,12 @@ index e7e20d89..168d6a90 100644
 +     */
 +    void unregisterAll(Predicate<? super Command> filter);
 +
-     /**
++    /**
       * Looks for the requested command and executes it if found.
       *
+      * @param sender The command's sender
 diff --git a/src/main/java/org/bukkit/command/SimpleCommandMap.java b/src/main/java/org/bukkit/command/SimpleCommandMap.java
-index 10d07114..af311aaa 100644
+index 10d0711..af311aa 100644
 --- a/src/main/java/org/bukkit/command/SimpleCommandMap.java
 +++ b/src/main/java/org/bukkit/command/SimpleCommandMap.java
 @@ -9,6 +9,7 @@ import java.util.HashMap;
@@ -75,5 +75,5 @@ index 10d07114..af311aaa 100644
       * {@inheritDoc}
       */
 -- 
-2.19.0
+2.7.4
 

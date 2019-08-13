@@ -1,11 +1,11 @@
-From 03bac23fb92d287dbf4bcba3cbbfdfa97741c27d Mon Sep 17 00:00:00 2001
+From 05ce53cadcd1f1594923f682542b3c0f67430434 Mon Sep 17 00:00:00 2001
 From: Austin Mayes <austin@avicus.net>
 Date: Fri, 4 Jan 2019 18:05:48 -0600
 Subject: [PATCH] Unregister plugin commands on disable
 
 
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index 3447aae4..5e58e8f8 100644
+index 3447aae..5e58e8f 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 @@ -22,6 +22,7 @@ import org.apache.commons.lang.Validate;
@@ -16,11 +16,10 @@ index 3447aae4..5e58e8f8 100644
  import org.bukkit.command.SimpleCommandMap;
  import org.bukkit.event.Event;
  import org.bukkit.event.EventCallback;
-@@ -452,6 +453,14 @@ public final class SimplePluginManager implements PluginManager {
-                         + plugin.getDescription().getFullName() + " (Is it up to date?)", ex, plugin); // Paper
+@@ -453,6 +454,14 @@ public final class SimplePluginManager implements PluginManager {
              }
  
-+            try {
+             try {
 +                server.getCommandMap().unregisterAll(command -> command instanceof PluginIdentifiableCommand &&
 +                                                                plugin == ((PluginIdentifiableCommand) command).getPlugin());
 +            } catch (Throwable ex) {
@@ -28,9 +27,10 @@ index 3447aae4..5e58e8f8 100644
 +                                                     plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
 +            }
 +
-             try {
++            try {
                  server.getMessenger().unregisterIncomingPluginChannel(plugin);
                  server.getMessenger().unregisterOutgoingPluginChannel(plugin);
+             } catch(Throwable ex) {
 -- 
-2.19.0
+2.7.4
 

@@ -1,11 +1,11 @@
-From f97fddd0865f56d202522a1f274ae14fbcc1845b Mon Sep 17 00:00:00 2001
+From a12a92c6faf1ff98701c5f0277af59e4c1dacd9e Mon Sep 17 00:00:00 2001
 From: Austin Mayes <austin@avicus.net>
 Date: Tue, 16 Jul 2019 16:52:12 -0500
 Subject: [PATCH] Implement common
 
 
 diff --git a/pom.xml b/pom.xml
-index 8a304559..6964bc29 100644
+index 8a30455..6964bc2 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -101,6 +101,12 @@
@@ -23,7 +23,7 @@ index 8a304559..6964bc29 100644
      <build>
 diff --git a/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java b/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
 deleted file mode 100644
-index f4494edc..00000000
+index f4494ed..0000000
 --- a/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
 +++ /dev/null
 @@ -1,19 +0,0 @@
@@ -48,7 +48,7 @@ index f4494edc..00000000
 -}
 \ No newline at end of file
 diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
-index d73e8c74..f5d90d84 100644
+index d73e8c7..f5d90d8 100644
 --- a/src/main/java/org/bukkit/Bukkit.java
 +++ b/src/main/java/org/bukkit/Bukkit.java
 @@ -12,7 +12,7 @@ import java.util.Set;
@@ -61,7 +61,7 @@ index d73e8c74..f5d90d84 100644
  import org.bukkit.command.CommandException;
  import org.bukkit.command.CommandMap;
 diff --git a/src/main/java/org/bukkit/Server.java b/src/main/java/org/bukkit/Server.java
-index f8a4b19e..b085fa5f 100644
+index f8a4b19..b085fa5 100644
 --- a/src/main/java/org/bukkit/Server.java
 +++ b/src/main/java/org/bukkit/Server.java
 @@ -14,7 +14,7 @@ import java.util.Set;
@@ -74,7 +74,7 @@ index f8a4b19e..b085fa5f 100644
  import org.bukkit.command.CommandException;
  import org.bukkit.command.CommandMap;
 diff --git a/src/main/java/org/bukkit/World.java b/src/main/java/org/bukkit/World.java
-index a021b99f..efa7956c 100644
+index a021b99..efa7956 100644
 --- a/src/main/java/org/bukkit/World.java
 +++ b/src/main/java/org/bukkit/World.java
 @@ -1,7 +1,7 @@
@@ -87,7 +87,7 @@ index a021b99f..efa7956c 100644
  import org.bukkit.generator.ChunkGenerator;
  
 diff --git a/src/main/java/org/bukkit/command/CommandSender.java b/src/main/java/org/bukkit/command/CommandSender.java
-index 6faad290..370155d0 100644
+index 6faad29..370155d 100644
 --- a/src/main/java/org/bukkit/command/CommandSender.java
 +++ b/src/main/java/org/bukkit/command/CommandSender.java
 @@ -1,11 +1,11 @@
@@ -117,11 +117,10 @@ index 6faad290..370155d0 100644
      // Paper start
      /**
       * Sends the component to the sender
-@@ -80,15 +74,6 @@ public interface CommandSender extends Permissible {
-         return Locale.ENGLISH;
+@@ -81,15 +75,6 @@ public interface CommandSender extends Permissible {
      }
  
--    /**
+     /**
 -     * Sends a translatable component to this command source using its {@link #getLocale() locale}.
 -     *
 -     * @param translatable the translatable component
@@ -130,11 +129,12 @@ index 6faad290..370155d0 100644
 -        this.sendMessage(translatable.render(this));
 -    }
 -
-     /**
+-    /**
       * Sends an array of translatable components to this command source using its {@link #getLocale() locale}.
       *
+      * @param translatables the translatable components
 diff --git a/src/main/java/org/bukkit/command/ProxiedCommandSender.java b/src/main/java/org/bukkit/command/ProxiedCommandSender.java
-index 24c4ebad..76386cba 100644
+index 24c4eba..76386cb 100644
 --- a/src/main/java/org/bukkit/command/ProxiedCommandSender.java
 +++ b/src/main/java/org/bukkit/command/ProxiedCommandSender.java
 @@ -17,4 +17,58 @@ public interface ProxiedCommandSender extends CommandSender {
@@ -197,14 +197,13 @@ index 24c4ebad..76386cba 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/entity/Player.java b/src/main/java/org/bukkit/entity/Player.java
-index 05c98d2e..22e6e6ca 100644
+index 05c98d2..22e6e6c 100644
 --- a/src/main/java/org/bukkit/entity/Player.java
 +++ b/src/main/java/org/bukkit/entity/Player.java
-@@ -32,60 +32,6 @@ import org.github.paperspigot.Title;
-  */
+@@ -33,60 +33,6 @@ import org.github.paperspigot.Title;
  public interface Player extends HumanEntity, Conversable, CommandSender, OfflinePlayer, PluginMessageRecipient {
  
--    /**
+     /**
 -     * Set a fake name for this player when viewed by the given player.
 -     * If the name is null then the fake name is cleared.
 -     */
@@ -258,9 +257,10 @@ index 05c98d2e..22e6e6ca 100644
 -     */
 -    public String getDisplayName(CommandSender viewer);
 -
-     /**
+-    /**
       * Gets the "friendly" name to display of this player. This may include
       * color.
+      * <p>
 -- 
-2.20.1
+2.7.4
 
