@@ -354,15 +354,15 @@ spigot:
 
 paper:
 
-  # Custom knockback options. Defaults are commented after each option
+  # Custom knockback configuration. Default values are configured and should be edited per-server in Infrastructure.
   knockback:
     
-    friction: 2.0D   # 2.0D
-    horizontal: 0.35D   # 0.35D
-    vertical: 0.35D   # 0.35D
-    vertical-limit: 0.4D   # 0.4D
-    extra-horizontal: 0.425D   # 0.425D
-    extra-vertical: 0.085D   # 0.085D
+    friction: 2.0D   # The amount of influence a players current velocity has on the knockback they take. (Velocity) 
+    horizontal: 0.35D   # Horizontal knockback
+    vertical: 0.35D   # Vertical knockback
+    vertical-limit: 0.4D   # Cap on how high people can be knocked upwards. After this cap players only take horizontal knockback.
+    extra-horizontal: 0.425D   # Horizontal knockback taken during sprint-hits. Replaces default horizontal value.
+    extra-vertical: 0.085D   # Vertical knockback taken during sprint-hits. Replaces default vertical value.
 
   settings:
 
