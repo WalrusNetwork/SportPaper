@@ -4,13 +4,13 @@ Date: Fri, 14 Jun 2019 19:03:54 +0100
 Subject: [PATCH] Add offered enchantments to PreparedItemEnchantEvent
 
 
-diff --git a/src/main/java/network/stratus/sportpaper/api/enchantments/PreparedEnchantment.java b/src/main/java/network/stratus/sportpaper/api/enchantments/PreparedEnchantment.java
+diff --git a/src/main/java/network/walrus/sportpaper/api/enchantments/PreparedEnchantment.java b/src/main/java/network/walrus/sportpaper/api/enchantments/PreparedEnchantment.java
 new file mode 100644
 index 00000000..aabc66e8
 --- /dev/null
-+++ b/src/main/java/network/stratus/sportpaper/api/enchantments/PreparedEnchantment.java
++++ b/src/main/java/network/walrus/sportpaper/api/enchantments/PreparedEnchantment.java
 @@ -0,0 +1,59 @@
-+package network.stratus.sportpaper.api.enchantments;
++package network.walrus.sportpaper.api.enchantments;
 +
 +import org.bukkit.enchantments.Enchantment;
 +
@@ -76,7 +76,7 @@ index 6c0aa9ff..41120f34 100644
 @@ -1,5 +1,6 @@
  package org.bukkit.event.enchantment;
  
-+import network.stratus.sportpaper.api.enchantments.PreparedEnchantment;
++import network.walrus.sportpaper.api.enchantments.PreparedEnchantment;
  import org.bukkit.block.Block;
  import org.bukkit.entity.Player;
  import org.bukkit.event.Cancellable;

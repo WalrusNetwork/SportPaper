@@ -12,7 +12,7 @@ index 5c473bef..2ba47b60 100644
  // CraftBukkit start
  import java.util.Map;
  
-+import network.stratus.sportpaper.api.enchantments.PreparedEnchantment;
++import network.walrus.sportpaper.api.enchantments.PreparedEnchantment;
  import org.bukkit.craftbukkit.inventory.CraftInventoryEnchanting;
  import org.bukkit.craftbukkit.inventory.CraftInventoryView;
  import org.bukkit.craftbukkit.inventory.CraftItemStack;

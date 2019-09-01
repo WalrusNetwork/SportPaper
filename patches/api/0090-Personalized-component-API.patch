@@ -4,14 +4,14 @@ Date: Tue, 5 Mar 2019 21:25:40 -0600
 Subject: [PATCH] Personalized component API
 
 
-diff --git a/src/main/java/network/stratus/sportpaper/api/text/TranslatableComponent.java b/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
+diff --git a/src/main/java/network/walrus/sportpaper/api/text/TranslatableComponent.java b/src/main/java/network/walrus/sportpaper/api/text/PersonalizedComponent.java
 similarity index 50%
-rename from src/main/java/network/stratus/sportpaper/api/text/TranslatableComponent.java
-rename to src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
+rename from src/main/java/network/walrus/sportpaper/api/text/TranslatableComponent.java
+rename to src/main/java/network/walrus/sportpaper/api/text/PersonalizedComponent.java
 index 2c4ebfcc..f4494edc 100644
---- a/src/main/java/network/stratus/sportpaper/api/text/TranslatableComponent.java
-+++ b/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
-@@ -2,17 +2,18 @@ package network.stratus.sportpaper.api.text;
+--- a/src/main/java/network/walrus/sportpaper/api/text/TranslatableComponent.java
++++ b/src/main/java/network/walrus/sportpaper/api/text/PersonalizedComponent.java
+@@ -2,17 +2,18 @@ package network.walrus.sportpaper.api.text;
  
  import java.util.Locale;
  import net.md_5.bungee.api.chat.BaseComponent;
@@ -43,8 +43,8 @@ index 0d835e42..d73e8c74 100644
  import java.util.UUID;
  import java.util.logging.Logger;
  
--import network.stratus.sportpaper.api.text.TranslatableComponent;
-+import network.stratus.sportpaper.api.text.PersonalizedComponent;
+-import network.walrus.sportpaper.api.text.TranslatableComponent;
++import network.walrus.sportpaper.api.text.PersonalizedComponent;
  import org.bukkit.Warning.WarningState;
  import org.bukkit.command.CommandException;
  import org.bukkit.command.CommandMap;
@@ -68,8 +68,8 @@ index e7878915..f8a4b19e 100644
  import java.util.UUID;
  import java.util.logging.Logger;
  
--import network.stratus.sportpaper.api.text.TranslatableComponent;
-+import network.stratus.sportpaper.api.text.PersonalizedComponent;
+-import network.walrus.sportpaper.api.text.TranslatableComponent;
++import network.walrus.sportpaper.api.text.PersonalizedComponent;
  import org.bukkit.Warning.WarningState;
  import org.bukkit.command.CommandException;
  import org.bukkit.command.CommandMap;
@@ -93,8 +93,8 @@ index 9daad1b6..a021b99f 100644
  package org.bukkit;
  
  import java.io.File;
--import network.stratus.sportpaper.api.text.TranslatableComponent;
-+import network.stratus.sportpaper.api.text.PersonalizedComponent;
+-import network.walrus.sportpaper.api.text.TranslatableComponent;
++import network.walrus.sportpaper.api.text.PersonalizedComponent;
  import org.bukkit.command.CommandSender;
  import org.bukkit.generator.ChunkGenerator;
  
@@ -123,8 +123,8 @@ index 0726b5ea..6faad290 100644
  package org.bukkit.command;
  
  import java.util.Locale;
--import network.stratus.sportpaper.api.text.TranslatableComponent;
-+import network.stratus.sportpaper.api.text.PersonalizedComponent;
+-import network.walrus.sportpaper.api.text.TranslatableComponent;
++import network.walrus.sportpaper.api.text.PersonalizedComponent;
  import org.bukkit.Server;
  import org.bukkit.permissions.Permissible;
  

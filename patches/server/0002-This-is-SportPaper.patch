@@ -31,7 +31,7 @@ index 6aaba502..092ca7df 100644
 -        <groupId>org.github.paperspigot</groupId>
 -        <artifactId>paperspigot-parent</artifactId>
 -        <version>dev-SNAPSHOT</version>
-+        <groupId>network.stratus</groupId>
++        <groupId>network.walrus</groupId>
 +        <artifactId>sportpaper-parent</artifactId>
 +        <version>dev-1.8-SNAPSHOT</version>
          <relativePath>../pom.xml</relativePath>
@@ -43,7 +43,7 @@ index 6aaba502..092ca7df 100644
          <dependency>
 -            <groupId>org.github.paperspigot</groupId>
 -            <artifactId>paperspigot-api</artifactId>
-+            <groupId>network.stratus</groupId>
++            <groupId>network.walrus</groupId>
 +            <artifactId>sportpaper-api</artifactId>
              <version>${project.version}</version>
              <type>jar</type>
@@ -79,7 +79,7 @@ index 3a4b1424..36bb612a 100644
          String result = "Unknown-Version";
  
 -        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/org.github.paperspigot/paperspigot-api/pom.properties");
-+        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/network.stratus/sportpaper-api/pom.properties");
++        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/network.walrus/sportpaper-api/pom.properties");
          Properties properties = new Properties();
  
          if (stream != null) {

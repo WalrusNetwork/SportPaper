@@ -4,13 +4,13 @@ Date: Tue, 23 Apr 2019 16:32:42 -0400
 Subject: [PATCH] Add world generation customization API
 
 
-diff --git a/src/main/java/network/stratus/sportpaper/api/world/CustomizedGenerationSettings.java b/src/main/java/network/stratus/sportpaper/api/world/CustomizedGenerationSettings.java
+diff --git a/src/main/java/network/walrus/sportpaper/api/world/CustomizedGenerationSettings.java b/src/main/java/network/walrus/sportpaper/api/world/CustomizedGenerationSettings.java
 new file mode 100644
 index 00000000..3906d4e2
 --- /dev/null
-+++ b/src/main/java/network/stratus/sportpaper/api/world/CustomizedGenerationSettings.java
++++ b/src/main/java/network/walrus/sportpaper/api/world/CustomizedGenerationSettings.java
 @@ -0,0 +1,74 @@
-+package network.stratus.sportpaper.api.world;
++package network.walrus.sportpaper.api.world;
 +
 +import java.util.Random;
 +
@@ -92,7 +92,7 @@ index 81c95d1f..0bb654a3 100644
  package org.bukkit;
  
  import java.util.Random;
-+import network.stratus.sportpaper.api.world.CustomizedGenerationSettings;
++import network.walrus.sportpaper.api.world.CustomizedGenerationSettings;
  import org.bukkit.command.CommandSender;
  import org.bukkit.generator.ChunkGenerator;
  import org.bukkit.plugin.Plugin;

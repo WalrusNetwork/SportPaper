@@ -4,13 +4,13 @@ Date: Fri, 16 Aug 2019 12:29:34 -0500
 Subject: [PATCH] Allow knockback to be changed with a command
 
 
-diff --git a/src/main/java/network/stratus/sportpaper/server/KnockbackModificationCommand.java b/src/main/java/network/stratus/sportpaper/server/KnockbackModificationCommand.java
+diff --git a/src/main/java/network/walrus/sportpaper/server/KnockbackModificationCommand.java b/src/main/java/network/walrus/sportpaper/server/KnockbackModificationCommand.java
 new file mode 100644
 index 00000000..9143c565
 --- /dev/null
-+++ b/src/main/java/network/stratus/sportpaper/server/KnockbackModificationCommand.java
++++ b/src/main/java/network/walrus/sportpaper/server/KnockbackModificationCommand.java
 @@ -0,0 +1,139 @@
-+package network.stratus.sportpaper.server;
++package network.walrus.sportpaper.server;
 +
 +import org.bukkit.ChatColor;
 +import org.bukkit.command.Command;
@@ -157,7 +157,7 @@ index c3f81c98..5446d108 100644
  import java.util.logging.Level;
  
  import net.minecraft.server.Items;
-+import network.stratus.sportpaper.server.KnockbackModificationCommand;
++import network.walrus.sportpaper.server.KnockbackModificationCommand;
  import org.apache.commons.lang.StringUtils;
  import org.bukkit.Bukkit;
  import org.bukkit.Material;

@@ -12,8 +12,8 @@ index d8a21927..3c42fec5 100644
  import net.md_5.bungee.api.chat.BaseComponent;
  import net.minecraft.server.*;
  
--import network.stratus.sportpaper.api.text.TranslatableComponent;
-+import network.stratus.sportpaper.api.text.PersonalizedComponent;
+-import network.walrus.sportpaper.api.text.TranslatableComponent;
++import network.walrus.sportpaper.api.text.PersonalizedComponent;
  import org.apache.commons.lang.Validate;
  import org.bukkit.BlockChangeDelegate;
  import org.bukkit.Bukkit;

@@ -13,7 +13,7 @@ index ee562d2e5..abfe2e4a4 100644
              <scope>test</scope>
          </dependency>
 +        <dependency>
-+            <groupId>network.stratus</groupId>
++            <groupId>network.walrus</groupId>
 +            <artifactId>common</artifactId>
 +            <version>1.0-SNAPSHOT</version>
 +        </dependency>
@@ -28,8 +28,8 @@ index e18da962d..79c7fe103 100644
  import net.md_5.bungee.api.chat.BaseComponent;
  import net.minecraft.server.*;
  
--import network.stratus.sportpaper.api.text.PersonalizedComponent;
-+import network.stratus.common.text.PersonalizedComponent;
+-import network.walrus.sportpaper.api.text.PersonalizedComponent;
++import network.walrus.common.text.PersonalizedComponent;
  import org.apache.commons.lang.Validate;
  import org.bukkit.BlockChangeDelegate;
  import org.bukkit.Bukkit;
@@ -59,22 +59,22 @@ index c32dee208..a0f3f1d5e 100644
      @Override
 -    public String getName(CommandSender viewer) {
 -        return this.getName();
-+    public String getName(network.stratus.common.CommandSender viewer) {
++    public String getName(network.walrus.common.CommandSender viewer) {
 +        return getName();
 +    }
 +
 +    @Override
-+    public void setFakeName(network.stratus.common.CommandSender viewer, String name) {
++    public void setFakeName(network.walrus.common.CommandSender viewer, String name) {
 +
 +    }
 +
 +    @Override
-+    public String getFakeName(network.stratus.common.CommandSender viewer) {
++    public String getFakeName(network.walrus.common.CommandSender viewer) {
 +        return getName();
 +    }
 +
 +    @Override
-+    public boolean hasFakeName(network.stratus.common.CommandSender viewer) {
++    public boolean hasFakeName(network.walrus.common.CommandSender viewer) {
 +        return false;
 +    }
 +
@@ -84,17 +84,17 @@ index c32dee208..a0f3f1d5e 100644
 +    }
 +
 +    @Override
-+    public void setFakeDisplayName(network.stratus.common.CommandSender viewer, String name) {
++    public void setFakeDisplayName(network.walrus.common.CommandSender viewer, String name) {
 +
 +    }
 +
 +    @Override
-+    public String getFakeDisplayName(network.stratus.common.CommandSender viewer) {
++    public String getFakeDisplayName(network.walrus.common.CommandSender viewer) {
 +        return getName();
 +    }
 +
 +    @Override
-+    public boolean hasFakeDisplayName(network.stratus.common.CommandSender viewer) {
++    public boolean hasFakeDisplayName(network.walrus.common.CommandSender viewer) {
 +        return false;
 +    }
 +
@@ -104,12 +104,12 @@ index c32dee208..a0f3f1d5e 100644
 +    }
 +
 +    @Override
-+    public String getPlayerListName(network.stratus.common.CommandSender viewer) {
++    public String getPlayerListName(network.walrus.common.CommandSender viewer) {
 +        return getName();
 +    }
 +
 +    @Override
-+    public String getDisplayName(network.stratus.common.CommandSender viewer) {
++    public String getDisplayName(network.walrus.common.CommandSender viewer) {
 +        return getName();
      }
  }
@@ -121,7 +121,7 @@ index 2c1b591a9..2d1532f1c 100644
  
  import net.minecraft.server.*;
  
-+import network.stratus.common.CommandSender;
++import network.walrus.common.CommandSender;
  import org.bukkit.Chunk;
  import org.bukkit.EntityEffect;
  import org.bukkit.Location;
@@ -212,7 +212,7 @@ index 442c8119f..f9e98970b 100644
  import net.minecraft.server.*;
  import net.minecraft.server.PacketPlayOutTitle.EnumTitleAction;
  
-+import network.stratus.common.CommandSender;
++import network.walrus.common.CommandSender;
  import org.apache.commons.lang.Validate;
  import org.apache.commons.lang.NotImplementedException;
  import org.bukkit.*;

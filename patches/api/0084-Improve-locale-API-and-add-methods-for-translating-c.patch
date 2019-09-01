@@ -4,13 +4,13 @@ Date: Wed, 26 Sep 2018 23:03:50 -0500
 Subject: [PATCH] Improve locale API and add methods for translating components
 
 
-diff --git a/src/main/java/network/stratus/sportpaper/api/text/TranslatableComponent.java b/src/main/java/network/stratus/sportpaper/api/text/TranslatableComponent.java
+diff --git a/src/main/java/network/walrus/sportpaper/api/text/TranslatableComponent.java b/src/main/java/network/walrus/sportpaper/api/text/TranslatableComponent.java
 new file mode 100644
 index 0000000..2c4ebfc
 --- /dev/null
-+++ b/src/main/java/network/stratus/sportpaper/api/text/TranslatableComponent.java
++++ b/src/main/java/network/walrus/sportpaper/api/text/TranslatableComponent.java
 @@ -0,0 +1,18 @@
-+package network.stratus.sportpaper.api.text;
++package network.walrus.sportpaper.api.text;
 +
 +import java.util.Locale;
 +import net.md_5.bungee.api.chat.BaseComponent;
@@ -37,7 +37,7 @@ index 55b2bec..0d835e4 100644
  import java.util.UUID;
  import java.util.logging.Logger;
  
-+import network.stratus.sportpaper.api.text.TranslatableComponent;
++import network.walrus.sportpaper.api.text.TranslatableComponent;
  import org.bukkit.Warning.WarningState;
  import org.bukkit.command.CommandException;
  import org.bukkit.command.CommandMap;
@@ -68,7 +68,7 @@ index 6777fbc..e787891 100644
  import java.util.UUID;
  import java.util.logging.Logger;
  
-+import network.stratus.sportpaper.api.text.TranslatableComponent;
++import network.walrus.sportpaper.api.text.TranslatableComponent;
  import org.bukkit.Warning.WarningState;
  import org.bukkit.command.CommandException;
  import org.bukkit.command.CommandMap;
@@ -100,7 +100,7 @@ index f6ae012..7bc56a8 100644
  package org.bukkit.command;
  
 +import java.util.Locale;
-+import network.stratus.sportpaper.api.text.TranslatableComponent;
++import network.walrus.sportpaper.api.text.TranslatableComponent;
  import org.bukkit.Server;
  import org.bukkit.permissions.Permissible;
  

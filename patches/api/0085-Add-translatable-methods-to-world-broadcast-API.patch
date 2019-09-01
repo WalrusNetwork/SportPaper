@@ -12,7 +12,7 @@ index 49d913a9..aedb1f40 100644
  package org.bukkit;
  
  import java.io.File;
-+import network.stratus.sportpaper.api.text.TranslatableComponent;
++import network.walrus.sportpaper.api.text.TranslatableComponent;
 +import org.bukkit.command.CommandSender;
  import org.bukkit.generator.ChunkGenerator;
  

@@ -14,20 +14,20 @@ index 8a304559..6964bc29 100644
          </dependency>
 +
 +        <dependency>
-+            <groupId>network.stratus</groupId>
++            <groupId>network.walrus</groupId>
 +            <artifactId>common</artifactId>
 +            <version>1.0-SNAPSHOT</version>
 +        </dependency>
      </dependencies>
  
      <build>
-diff --git a/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java b/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
+diff --git a/src/main/java/network/walrus/sportpaper/api/text/PersonalizedComponent.java b/src/main/java/network/walrus/sportpaper/api/text/PersonalizedComponent.java
 deleted file mode 100644
 index f4494edc..00000000
---- a/src/main/java/network/stratus/sportpaper/api/text/PersonalizedComponent.java
+--- a/src/main/java/network/walrus/sportpaper/api/text/PersonalizedComponent.java
 +++ /dev/null
 @@ -1,19 +0,0 @@
--package network.stratus.sportpaper.api.text;
+-package network.walrus.sportpaper.api.text;
 -
 -import java.util.Locale;
 -import net.md_5.bungee.api.chat.BaseComponent;
@@ -55,8 +55,8 @@ index d73e8c74..f5d90d84 100644
  import java.util.UUID;
  import java.util.logging.Logger;
  
--import network.stratus.sportpaper.api.text.PersonalizedComponent;
-+import network.stratus.common.text.PersonalizedComponent;
+-import network.walrus.sportpaper.api.text.PersonalizedComponent;
++import network.walrus.common.text.PersonalizedComponent;
  import org.bukkit.Warning.WarningState;
  import org.bukkit.command.CommandException;
  import org.bukkit.command.CommandMap;
@@ -68,8 +68,8 @@ index f8a4b19e..b085fa5f 100644
  import java.util.UUID;
  import java.util.logging.Logger;
  
--import network.stratus.sportpaper.api.text.PersonalizedComponent;
-+import network.stratus.common.text.PersonalizedComponent;
+-import network.walrus.sportpaper.api.text.PersonalizedComponent;
++import network.walrus.common.text.PersonalizedComponent;
  import org.bukkit.Warning.WarningState;
  import org.bukkit.command.CommandException;
  import org.bukkit.command.CommandMap;
@@ -81,8 +81,8 @@ index a021b99f..efa7956c 100644
  package org.bukkit;
  
  import java.io.File;
--import network.stratus.sportpaper.api.text.PersonalizedComponent;
-+import network.stratus.common.text.PersonalizedComponent;
+-import network.walrus.sportpaper.api.text.PersonalizedComponent;
++import network.walrus.common.text.PersonalizedComponent;
  import org.bukkit.command.CommandSender;
  import org.bukkit.generator.ChunkGenerator;
  
@@ -94,13 +94,13 @@ index 6faad290..370155d0 100644
  package org.bukkit.command;
  
  import java.util.Locale;
--import network.stratus.sportpaper.api.text.PersonalizedComponent;
-+import network.stratus.common.text.PersonalizedComponent;
+-import network.walrus.sportpaper.api.text.PersonalizedComponent;
++import network.walrus.common.text.PersonalizedComponent;
  import org.bukkit.Server;
  import org.bukkit.permissions.Permissible;
  
 -public interface CommandSender extends Permissible {
-+public interface CommandSender extends Permissible, network.stratus.common.CommandSender {
++public interface CommandSender extends Permissible, network.walrus.common.CommandSender {
  
      /**
       * Sends this sender a message
@@ -142,22 +142,22 @@ index 24c4ebad..76386cba 100644
      CommandSender getCallee();
  
 +    @Override
-+    default String getName(network.stratus.common.CommandSender viewer) {
++    default String getName(network.walrus.common.CommandSender viewer) {
 +        return getCallee().getName(viewer);
 +    }
 +
 +    @Override
-+    default void setFakeName(network.stratus.common.CommandSender viewer, String name) {
++    default void setFakeName(network.walrus.common.CommandSender viewer, String name) {
 +        getCallee().setFakeName(viewer, name);
 +    }
 +
 +    @Override
-+    default String getFakeName(network.stratus.common.CommandSender viewer) {
++    default String getFakeName(network.walrus.common.CommandSender viewer) {
 +        return getCallee().getFakeName(viewer);
 +    }
 +
 +    @Override
-+    default boolean hasFakeName(network.stratus.common.CommandSender viewer) {
++    default boolean hasFakeName(network.walrus.common.CommandSender viewer) {
 +        return getCallee().hasFakeName(viewer);
 +    }
 +
@@ -167,17 +167,17 @@ index 24c4ebad..76386cba 100644
 +    }
 +
 +    @Override
-+    default void setFakeDisplayName(network.stratus.common.CommandSender viewer, String name) {
++    default void setFakeDisplayName(network.walrus.common.CommandSender viewer, String name) {
 +        getCallee().setFakeDisplayName(viewer, name);
 +    }
 +
 +    @Override
-+    default String getFakeDisplayName(network.stratus.common.CommandSender viewer) {
++    default String getFakeDisplayName(network.walrus.common.CommandSender viewer) {
 +        return getCallee().getFakeDisplayName(viewer);
 +    }
 +
 +    @Override
-+    default boolean hasFakeDisplayName(network.stratus.common.CommandSender viewer) {
++    default boolean hasFakeDisplayName(network.walrus.common.CommandSender viewer) {
 +        return getCallee().hasFakeDisplayName(viewer);
 +    }
 +
@@ -187,12 +187,12 @@ index 24c4ebad..76386cba 100644
 +    }
 +
 +    @Override
-+    default String getPlayerListName(network.stratus.common.CommandSender viewer) {
++    default String getPlayerListName(network.walrus.common.CommandSender viewer) {
 +        return getCallee().getPlayerListName(viewer);
 +    }
 +
 +    @Override
-+    default String getDisplayName(network.stratus.common.CommandSender viewer) {
++    default String getDisplayName(network.walrus.common.CommandSender viewer) {
 +        return getCallee().getDisplayName(viewer);
 +    }
  }

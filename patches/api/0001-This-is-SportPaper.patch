@@ -15,7 +15,7 @@ index fe9d6d26..70aa3ad0 100644
 -        <groupId>org.github.paperspigot</groupId>
 -        <artifactId>paperspigot-parent</artifactId>
 -        <version>dev-SNAPSHOT</version>
-+        <groupId>network.stratus</groupId>
++        <groupId>network.walrus</groupId>
 +        <artifactId>sportpaper-parent</artifactId>
 +        <version>dev-1.8-SNAPSHOT</version>
      </parent>

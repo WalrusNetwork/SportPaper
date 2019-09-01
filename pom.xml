@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>network.stratus</groupId>
+    <groupId>network.walrus</groupId>
     <artifactId>sportpaper-parent</artifactId>
     <version>dev-1.8-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -15,8 +15,8 @@
             <url>https://hub.spigotmc.org/nexus/content/groups/public</url>
         </repository>
         <repository>
-            <id>stratus-public</id>
-            <url>https://repo.stratus.network/repository/maven-public/</url>
+            <id>walrus-public</id>
+			<url>https://maven-public.walrus.network</url>
         </repository>
     </repositories>
     <modules>
@@ -26,12 +26,12 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>stratus-public</id>
-            <url>https://repo.stratus.network/repository/maven-public/</url>
+            <id>walrus-public</id>
+			<url>https://maven-public.walrus.network</url>
         </snapshotRepository>
         <repository>
-            <id>stratus-public</id>
-            <url>https://repo.stratus.network/repository/maven-public/</url>
+			<id>walrus-public</id>
+			<url>https://maven-public.walrus.network</url>
         </repository>
     </distributionManagement>
 </project>
