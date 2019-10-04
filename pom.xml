@@ -27,11 +27,22 @@
     <distributionManagement>
         <snapshotRepository>
             <id>walrus-public</id>
-			<url>https://maven-public.walrus.network</url>
+			<url>gs://maven-pub</url>
         </snapshotRepository>
         <repository>
 			<id>walrus-public</id>
-			<url>https://maven-public.walrus.network</url>
+			<url>gs://maven-pub</url>
         </repository>
     </distributionManagement>
+
+	<build>
+		<extensions>
+			<extension>
+				<groupId>com.gkatzioura.maven.cloud</groupId>
+				<artifactId>google-storage-wagon</artifactId>
+				<version>1.0</version>
+			</extension>
+		</extensions>
+	</build>
+
 </project>
