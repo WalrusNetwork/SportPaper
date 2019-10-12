@@ -1,4 +1,4 @@
-From 8958c2b53a255c3f13c49cd385f48e9ae796f5e4 Mon Sep 17 00:00:00 2001
+From 338898db543d16379a83a762fbff8036440362cb Mon Sep 17 00:00:00 2001
 From: Austin Mayes <austin@avicus.net>
 Date: Fri, 16 Aug 2019 12:29:34 -0500
 Subject: [PATCH] Allow knockback to be changed with a command
@@ -6,7 +6,7 @@ Subject: [PATCH] Allow knockback to be changed with a command
 
 diff --git a/src/main/java/network/walrus/sportpaper/server/KnockbackModificationCommand.java b/src/main/java/network/walrus/sportpaper/server/KnockbackModificationCommand.java
 new file mode 100644
-index 00000000..9143c565
+index 00000000..27559890
 --- /dev/null
 +++ b/src/main/java/network/walrus/sportpaper/server/KnockbackModificationCommand.java
 @@ -0,0 +1,139 @@
@@ -150,7 +150,7 @@ index 00000000..9143c565
 +    }
 +}
 diff --git a/src/main/java/org/github/paperspigot/PaperSpigotConfig.java b/src/main/java/org/github/paperspigot/PaperSpigotConfig.java
-index c3f81c98..5446d108 100644
+index c3f81c98..74b9fb6e 100644
 --- a/src/main/java/org/github/paperspigot/PaperSpigotConfig.java
 +++ b/src/main/java/org/github/paperspigot/PaperSpigotConfig.java
 @@ -6,6 +6,7 @@ import java.util.*;
@@ -171,5 +171,5 @@ index c3f81c98..5446d108 100644
      }
  }
 -- 
-2.20.1
+2.23.0
 

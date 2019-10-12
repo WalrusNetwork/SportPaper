@@ -27,11 +27,11 @@
     <distributionManagement>
         <snapshotRepository>
             <id>walrus-public</id>
-			<url>gs://maven-pub</url>
+						<url>gs://maven-pub</url>
         </snapshotRepository>
-        <repository>
-			<id>walrus-public</id>
-			<url>gs://maven-pub</url>
+				<repository>
+						<id>walrus-public</id>
+						<url>gs://maven-pub</url>
         </repository>
     </distributionManagement>
 

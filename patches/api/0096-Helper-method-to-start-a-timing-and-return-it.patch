@@ -1,0 +1,30 @@
+From c6416fdb74a441e245f4b892185ccb28cf12b056 Mon Sep 17 00:00:00 2001
+From: Austin Mayes <austin@avicus.net>
+Date: Sat, 12 Oct 2019 17:40:20 -0500
+Subject: [PATCH] Helper method to start a timing and return it
+
+
+diff --git a/src/main/java/co/aikar/timings/Timing.java b/src/main/java/co/aikar/timings/Timing.java
+index 4d990b13..cf526938 100644
+--- a/src/main/java/co/aikar/timings/Timing.java
++++ b/src/main/java/co/aikar/timings/Timing.java
+@@ -27,6 +27,16 @@ package co.aikar.timings;
+  * Provides an ability to time sections of code within the Minecraft Server
+  */
+ public interface Timing extends AutoCloseable {
++    /**
++     * Start timings if sync and return this object so it can be used in try-with-resource blocks.
++     * 
++     * @return this object
++     */
++    public default Timing startClosable() {
++        startTimingIfSync();
++        return this;
++    }
++
+     /**
+      * Starts timing the execution until {@link #stopTiming()} is called.
+      */
+-- 
+2.23.0
+
