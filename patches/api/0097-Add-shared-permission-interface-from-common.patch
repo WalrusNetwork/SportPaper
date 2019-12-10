@@ -1,0 +1,40 @@
+From ded8b6d791b2f81ff385eac6ffcac3979cbf46a4 Mon Sep 17 00:00:00 2001
+From: Austin Mayes <austin@avicus.net>
+Date: Tue, 10 Dec 2019 02:22:00 -0600
+Subject: [PATCH] Add shared permission interface from common
+
+
+diff --git a/src/main/java/org/bukkit/permissions/Permissible.java b/src/main/java/org/bukkit/permissions/Permissible.java
+index a7c0ef58..086a0770 100644
+--- a/src/main/java/org/bukkit/permissions/Permissible.java
++++ b/src/main/java/org/bukkit/permissions/Permissible.java
+@@ -2,12 +2,14 @@ package org.bukkit.permissions;
+ 
+ import java.util.Collection;
+ import java.util.Set;
++import java.util.stream.Collectors;
++
+ import org.bukkit.plugin.Plugin;
+ 
+ /**
+  * Represents an object that may be assigned permissions
+  */
+-public interface Permissible extends ServerOperator {
++public interface Permissible extends ServerOperator, network.walrus.common.Permissible {
+ 
+     /**
+      * Checks if this object contains an override for the specified
+@@ -186,4 +188,10 @@ public interface Permissible extends ServerOperator {
+      * and applying to the given {@link Permission}.
+      */
+     Collection<PermissionAttachmentInfo> getAttachments(Plugin plugin, Permission permission);
++
++    @Override
++    default Collection<String> getPermissions() {
++        return getAttachments().stream()
++                .map(p -> (p.getValue() ? "" : "-") + p.getPermission()).collect(Collectors.toList());
++    }
+ }
+-- 
+2.23.0
+
