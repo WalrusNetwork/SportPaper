@@ -1,6 +1,6 @@
 # SportPaper
 
-A fork of Paper 1.8 with changes for the Stratus Network using Magnet's build system.
+A fork of Paper 1.8 with changes for the Walrus Network using Magnet's build system.
 
 Requirements
 ------------
