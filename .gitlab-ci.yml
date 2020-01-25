@@ -18,7 +18,7 @@ maven:
     - wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
     - tar zxvf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --usage-reporting=false --path-update=true
     - google-cloud-sdk/bin/gcloud --quiet components update
-    - google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+    - google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $GCLOUD_SERVICE_KEY
     - google-cloud-sdk/bin/gcloud config set project walrus-network
   script:
     - bash sportpaper build
